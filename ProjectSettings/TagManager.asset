@@ -7,22 +7,27 @@ TagManager:
   - BulletManager
   - GamePlayerManager
   - Target
-  - Lleg
-  - Rleg
   - Larm
   - Rarm
   - GameNetworkObject
-  - DollObj
-  - Body
+  - NetworkManager
+  - GamePlayManager
+  - Head
+  - Pose
   - PoseManager
+  - Lleg
+  - Rleg
+  - Body
+  - DollObj
+  - SoundManager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - RoomDoll
   - Water
   - UI
-  - 
+  - DollMagnet
   - 
   - 
   - 

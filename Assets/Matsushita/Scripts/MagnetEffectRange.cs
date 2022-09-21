@@ -4,10 +4,6 @@ public class MagnetEffectRange : MonoBehaviour
 {
     [SerializeField] GameObject tapEffect;              // タップエフェクト
 
-    private void Start()
-    {
-
-    }
     void Update()
     {
         if (Input.GetMouseButton(0))
