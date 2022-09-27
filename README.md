@@ -1,2 +1,2 @@
-# Rteam
+# PitattoDance
 ピタッとダンス公開用のリポジトリ
