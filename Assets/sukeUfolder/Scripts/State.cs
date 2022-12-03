@@ -8,7 +8,7 @@ public class State : MonoBehaviour
 {
     ///このスクリプト自体はネットワークから切り離して動作させる
     [SerializeField]
-    NewNetworkManager networkManager;
+    NetworkManager networkManager;
     [SerializeField]
     TMP_InputField inputField;//プレイヤーネームの入力欄
     [SerializeField]
@@ -32,14 +32,14 @@ public class State : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.PlayBgmByName("Title");
-        networkManager =GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NewNetworkManager>();
+        networkManager =GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
         inputField = inputField.GetComponent<TMP_InputField>();//InputFieldの情報を取得
         GameButtonText = GameButton.GetComponentInChildren<TextMeshProUGUI>();
         networkManager.OnUpdateMember += roomSetup;
         networkManager.OnJoinLobby += GoRoom1;
         networkManager.OnJoinRoom += GoingRoom;
         networkManager.OnLeftRoomA += LeavingRoom;
-        if (networkManager.currentState == NewNetworkManager.NetworkState.Room)
+        if (networkManager.currentState == NetworkManager.NetworkState.Room)
         {
             Title.SetActive(false);
             Room.SetActive(true);
@@ -123,7 +123,7 @@ public class State : MonoBehaviour
     public void LeaveLobby()
     {
         //SoundManager.Instance.PlaySeByName("DecisionC");
-        networkManager.LeaveLobby();
+        networkManager.Disconnect();
         StartCoroutine("LeavingLobby");
         //Lobby.SetActive(false);
     }

@@ -13,10 +13,8 @@ public class TestMagnetControl: MonoBehaviour
     //警告　Awakeでエラーが出てると生成した時にこのスクリプトが非アクティブになってしまう。エラーログにもでないから注意
     void Start()
     {
- 
         var gamePlayerManager = GameObject.FindWithTag("GamePlayerManager");
         Area = GameObject.Find("PlayArea");
-
     }
 
     void FixedUpdate()

@@ -9,8 +9,8 @@ public class Magnet : MonoBehaviour
     Rigidbody target_body; // オブジェクトのRigidbody
     [SerializeField]
     private GameObject target; // 磁石に引かれるオブジェクト
-    private bool _isPushed = false; // マウスが押されているか押されていないか
 
+    PhotonView photonView;
     //lineRenderer用
     Vector3[] positions; //マグネットと引っ張る箇所の間の座標
     LineRenderer lineRenderer;
@@ -18,10 +18,11 @@ public class Magnet : MonoBehaviour
     private GameObject RightHand;
     private GameObject LeftHand;
     private GameObject Head;
-    NewNetworkManager networkManager;
+    NetworkManager networkManager;
+
     private void Start()
     {
-        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NewNetworkManager>();
+        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
         //lineRenderer用の初期設定
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         RightHand = GameObject.FindWithTag("Rarm");
@@ -34,20 +35,14 @@ public class Magnet : MonoBehaviour
         };
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
+        photonView = GetComponent<PhotonView>();
     }
     void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            _isPushed = true;
-        }
-        else
-        {
-            _isPushed = false;
-        }
         //マウスが押されて、かつ、リプレイ時ではないとき、
-        if (_isPushed && networkManager.currentGameState==NewNetworkManager.GameState.Playing)
+        if (Input.GetMouseButton(0) && networkManager.currentGameState==NetworkManager.GameState.Playing)
         {
+            if (!photonView.IsMine) return;
             target = closestDoll();//ターゲットに最も近い人形を代入する
             lineRenderer.enabled = true;
             if (target != null)//ターゲットがnullじゃなかったら

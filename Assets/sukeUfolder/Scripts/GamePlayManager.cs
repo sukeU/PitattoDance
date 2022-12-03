@@ -5,7 +5,7 @@ using TMPro;
 
 public class GamePlayManager : MonoBehaviour
 {
-    NewNetworkManager networkManager;
+    NetworkManager networkManager;
     public bool isReplay { get; private set; } = false;//リプレイ用の変数
     public bool result { get; private set; } = false; //リザルト切替用
     //public bool play { get; private set; } = false; //プレイ画面切り替え用
@@ -20,7 +20,6 @@ public class GamePlayManager : MonoBehaviour
     private bool IsRunning = false;
     [SerializeField]
     GameObject[] PoseObjs = new GameObject[3];//Poseの数に応じて増やす必要がある
-                                              //CollisionManager[] PoseManager = new CollisionManager[3];
     [SerializeField]
     TextMeshProUGUI scoreText;
     [SerializeField]
@@ -28,7 +27,7 @@ public class GamePlayManager : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.PlaySeByName("Start");
-        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NewNetworkManager>();
+        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
         networkManager.OnUpdateScore += GetScore;//ネットワークマネージャーでスコアの変化があると呼ばれる様になる
          //初期化
         score = 0;
@@ -41,16 +40,16 @@ public class GamePlayManager : MonoBehaviour
     {
         switch (networkManager.currentGameState)
         {
-            case NewNetworkManager.GameState.Ready:
+            case NetworkManager.GameState.Ready:
                 playObj.SetActive(false);
                 resultObj.SetActive(false);
                 break;
-            case NewNetworkManager.GameState.Playing:
+            case NetworkManager.GameState.Playing:
                 StartCoroutine("Pose");
                 playObj.SetActive(true); //制限時間の表記をオン
                 //play = true;
                 break;
-            case NewNetworkManager.GameState.Replay:
+            case NetworkManager.GameState.Replay:
                 playObj.SetActive(false); //制限時間の表記をオフ
                 foreach (var obj in PoseObjs)
                 {
@@ -58,7 +57,7 @@ public class GamePlayManager : MonoBehaviour
                 }
                 isReplay = true;
                 break;
-            case NewNetworkManager.GameState.Finish:
+            case NetworkManager.GameState.Finish:
                 result = true;
                 resultObj.SetActive(true);
                 break;
@@ -84,11 +83,10 @@ public class GamePlayManager : MonoBehaviour
 
     public void GetScore()//スコアを受け取る
     {
-        if (networkManager.currentGameState != NewNetworkManager.GameState.Playing) return;//ゲームプレイ中じゃなかったらリターン
+        if (networkManager.currentGameState != NetworkManager.GameState.Playing) return;//ゲームプレイ中じゃなかったらリターン
         score = networkManager.score;
         combo = networkManager.combo;
         MaxCombo = networkManager.MaxCombo;
-        Debug.Log("スコア:" + score);
         scoreText.text = score.ToString();
         comboText.text = combo.ToString();
     }

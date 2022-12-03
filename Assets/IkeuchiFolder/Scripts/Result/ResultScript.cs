@@ -35,7 +35,7 @@ public class ResultScript : MonoBehaviour
     [SerializeField]
     private GameObject ReturnToRoomButoonUI;    //ルームに戻るボタンのUI
     GamePlayManager gamePlayManager; //スコアの取得に必要
-    NewNetworkManager networkManager; //部屋にもどるときに必要
+    NetworkManager networkManager; //部屋にもどるときに必要
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,7 @@ public class ResultScript : MonoBehaviour
         comboNumText = comboNumUI.GetComponent<TextMeshProUGUI>();
         ResultPhoto = commentUI.GetComponent<Image>();
         gamePlayManager = GameObject.FindGameObjectWithTag("GamePlayManager").GetComponent<GamePlayManager>();
-        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NewNetworkManager>();
+        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
 
         //初期化
         scoreNumUI.SetActive(false);
