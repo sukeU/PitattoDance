@@ -6,34 +6,34 @@ using TMPro;
 
 public class State : MonoBehaviour
 {
-    ///‚±‚ÌƒXƒNƒŠƒvƒg©‘Ì‚Íƒlƒbƒgƒ[ƒN‚©‚çØ‚è—£‚µ‚Ä“®ì‚³‚¹‚é
+    ///ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆè‡ªä½“ã¯ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‹ã‚‰åˆ‡ã‚Šé›¢ã—ã¦å‹•ä½œã•ã›ã‚‹
     [SerializeField]
     NetworkManager networkManager;
     [SerializeField]
-    TMP_InputField inputField;//ƒvƒŒƒCƒ„[ƒl[ƒ€‚Ì“ü—Í—“
+    TMP_InputField inputField;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒãƒ¼ãƒ ã®å…¥åŠ›æ¬„
     [SerializeField]
-    string nickname;//ƒvƒŒƒCƒ„[ƒl[ƒ€
+    string nickname;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒãƒ¼ãƒ 
     [Space]
     [SerializeField]
-    GameObject Title;//ƒ^ƒCƒgƒ‹ƒIƒuƒWƒFƒNƒg
+    GameObject Title;//ã‚¿ã‚¤ãƒˆãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     [SerializeField]
-    GameObject Lobby;//ƒƒr[ƒIƒuƒWƒFƒNƒg
+    GameObject Lobby;//ãƒ­ãƒ“ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     [SerializeField]
-    GameObject Room;//ƒ‹[ƒ€ƒIƒuƒWƒFƒNƒg
+    GameObject Room;//ãƒ«ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     [SerializeField]
-    TextMeshProUGUI RoomPlayerList;//ƒ‹[ƒ€‚Ì–¼‘O—“‚ğXV‚·‚é‚½‚ß‚É•K—v
+    TextMeshProUGUI RoomPlayerList;//ãƒ«ãƒ¼ãƒ ã®åå‰æ¬„ã‚’æ›´æ–°ã™ã‚‹ãŸã‚ã«å¿…è¦
     [SerializeField]
-    GameObject GameButton; //ƒQ[ƒ€ƒ{ƒ^ƒ“‚ÌƒIƒuƒWƒFƒNƒg
+    GameObject GameButton; //ã‚²ãƒ¼ãƒ ãƒœã‚¿ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     [SerializeField] GameObject loadingText;
     [SerializeField]
-    GameObject RoomDollObjects; //ƒ‹[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌlŒ`‚Æ”wŒi
+    GameObject RoomDollObjects; //ãƒ«ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®äººå½¢ã¨èƒŒæ™¯
     private TextMeshProUGUI GameButtonText;
 
     void Start()
     {
         SoundManager.Instance.PlayBgmByName("Title");
         networkManager =GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
-        inputField = inputField.GetComponent<TMP_InputField>();//InputField‚Ìî•ñ‚ğæ“¾
+        inputField = inputField.GetComponent<TMP_InputField>();//InputFieldã®æƒ…å ±ã‚’å–å¾—
         GameButtonText = GameButton.GetComponentInChildren<TextMeshProUGUI>();
         networkManager.OnUpdateMember += roomSetup;
         networkManager.OnJoinLobby += GoRoom1;
@@ -44,11 +44,11 @@ public class State : MonoBehaviour
             Title.SetActive(false);
             Room.SetActive(true);
             RoomDollObjects.SetActive(true);
-            networkManager.roomSetUp();//ƒlƒbƒgƒ[ƒN‘¤‚Ì•”‰®İ’è
-            roomSetup();//‚±‚ÌƒXƒNƒŠƒvƒg‚Ìƒ‹[ƒ€‚ğƒZƒbƒg‚·‚é
+            networkManager.roomSetUp();//ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯å´ã®éƒ¨å±‹è¨­å®š
+            roomSetup();//ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ãƒ«ãƒ¼ãƒ ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         }
     }
-    public void GoLobby()//ƒ^ƒCƒgƒ‹‰æ–Ê‚Ì“üê‚ğ‰Ÿ‚µ‚½‚ÉŒÄ‚Ô
+    public void GoLobby()//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã®å…¥å ´ã‚’æŠ¼ã—ãŸæ™‚ã«å‘¼ã¶
     {
         SoundManager.Instance.PlaySeByName("DecisionA");
         nickname = inputField.text;
@@ -67,20 +67,20 @@ public class State : MonoBehaviour
         networkManager.OnLeftRoomA -= LeavingRoom;
     }
 
-    IEnumerator GoingLobby()//Ú‘±‚·‚é‚Ü‚Å‘Ò‚Â
+    IEnumerator GoingLobby()//æ¥ç¶šã™ã‚‹ã¾ã§å¾…ã¤
     {
         yield return new WaitForSeconds(3.0f);
        // Lobby.SetActive(true);
     }
 
-    public void GoRoom1()//ƒ‹[ƒ€‚És‚­
+    public void GoRoom1()//ãƒ«ãƒ¼ãƒ ã«è¡Œã
     {
         //SoundManager.Instance.PlaySeByName("DecisionA");
         networkManager.CreateRoom1();
        // Lobby.SetActive(false);
     }
 
-    public void GoRoom2()//ƒ‹[ƒ€‚És‚­
+    public void GoRoom2()//ãƒ«ãƒ¼ãƒ ã«è¡Œã
     {
         SoundManager.Instance.PlaySeByName("DecisionA");
         networkManager.CreateRoom2();
@@ -88,16 +88,16 @@ public class State : MonoBehaviour
         Lobby.SetActive(false);
     }
 
-    public void GoRoom3()//ƒ‹[ƒ€‚És‚­
+    public void GoRoom3()//ãƒ«ãƒ¼ãƒ ã«è¡Œã
     {
         SoundManager.Instance.PlaySeByName("DecisionA");
         networkManager.CreateRoom3();
         StartCoroutine("GoingRoom");
         Lobby.SetActive(false);
     }
-    void GoingRoom()//ƒlƒbƒgƒ[ƒN‚Ì’l‚Ìó‚¯“n‚µ‚ÉƒRƒ‹[ƒ`ƒ“‚ğg‚í‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
+    void GoingRoom()//ãƒ«ãƒ¼ãƒ ã¸ç§»å‹•ã—ã¦ã„ã‚‹é–“ã®ç”»é¢å‡¦ç†
     {
-        networkManager.roomSetUp();//ƒlƒbƒgƒ[ƒN‘¤‚Ì•”‰®İ’è
+        networkManager.roomSetUp();//ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯å´ã®éƒ¨å±‹è¨­å®š
         roomSetup();
         Room.SetActive(true);
         loadingText.SetActive(false);
@@ -116,16 +116,13 @@ public class State : MonoBehaviour
 
     public void LeavingRoom()
     {
-       // Lobby.SetActive(true);
         LeaveLobby();
     }
 
     public void LeaveLobby()
     {
-        //SoundManager.Instance.PlaySeByName("DecisionC");
         networkManager.Disconnect();
         StartCoroutine("LeavingLobby");
-        //Lobby.SetActive(false);
     }
 
     IEnumerator LeavingLobby()
@@ -135,22 +132,22 @@ public class State : MonoBehaviour
         loadingText.SetActive(false);
     }
 
-    private void ChangeMemberList()
+    private void ChangeMemberList()//ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆãƒ†ã‚­ã‚¹ãƒˆã®æ›´æ–°
     {
         RoomPlayerList.text = networkManager.RoomPlayerList;
     }
 
 
-    public void roomSetup()//€”õƒ{ƒ^ƒ“‚È‚Ç‚Ì‰Šú‰»
+    public void roomSetup()//æº–å‚™ãƒœã‚¿ãƒ³ãªã©ã®åˆæœŸåŒ–
     {
-        if (networkManager.IsHost)//ƒzƒXƒg‚¾‚Á‚½‚ç
+        if (networkManager.IsHost)//ãƒ›ã‚¹ãƒˆã ã£ãŸã‚‰
         {
-            GameButtonText.text = "ƒQ[ƒ€ƒXƒ^[ƒg";
+            GameButtonText.text = "ã‚²ãƒ¼ãƒ ã‚¹ã‚¿ãƒ¼ãƒˆ";
             GameButtonText.color = Color.white;
         }
-        else//ƒzƒXƒg‚¶‚á‚È‚©‚Á‚½‚ç
+        else//ãƒ›ã‚¹ãƒˆã˜ã‚ƒãªã‹ã£ãŸã‚‰
         {
-            GameButtonText.text = "€”õ’†";
+            GameButtonText.text = "æº–å‚™ä¸­";
             GameButtonText.color = Color.red;
         }
         ChangeMemberList();
@@ -158,21 +155,21 @@ public class State : MonoBehaviour
 
     public void PressButton()
     {
-        if (networkManager.IsHost)//ƒzƒXƒg‚¾‚Á‚½‚ç
+        if (networkManager.IsHost)//ãƒ›ã‚¹ãƒˆã ã£ãŸã‚‰
         {
             networkManager.PressedStartButton();
         }
-        else//ƒzƒXƒg‚¶‚á‚È‚©‚Á‚½‚ç
+        else//ãƒ›ã‚¹ãƒˆã˜ã‚ƒãªã‹ã£ãŸã‚‰
         {
             networkManager.PressedReadyButton();
             if (networkManager.IsReady)
             {
-                GameButtonText.text = "€”õŠ®—¹";
+                GameButtonText.text = "æº–å‚™å®Œäº†";
                 GameButtonText.color = Color.green;
             }
             else
             {
-                GameButtonText.text = "€”õ’†";
+                GameButtonText.text = "æº–å‚™ä¸­";
                 GameButtonText.color = Color.red;
             }
         }
